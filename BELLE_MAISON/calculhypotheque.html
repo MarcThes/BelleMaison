@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculateur d'hypothèque</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="center-text margin-top">
+    <div class="horloge-div">
+      <p>
+         <h1 style="color:gold">BELLEMAISON</h1>
+      </p>
+   </div>
+    <div class="center-flex">
+    <h2 class="maison-desc">Calculateur d'hypothèque</h2>
+    </div>
+    <form name="formulaire">
+        <label class="maison-desc center-text" for="montant">Montant à emprunter:</label> <input type="number" id="montant" name="montant"><br/>
+        <label class="maison-desc center-text" for="taux">Taux d'intérêt:</label> <input type="number" id="taux" name="taux"><br/>
+        <label class="maison-desc center-text" for="terme">Terme (en années):</label> <input type="number" id="terme" name="terme"><br/>
+        <input type="button" value="Calculer Hypothèque" onclick="calculer(document.formulaire);"><br/>
+        <input type="button" value="Effacer" onclick="document.formulaire.reset();"><br/>
+    </form>
+
+    <script>
+  
+
+function calculerTotalPaiementHypothecaire(montantInitial, tauxInteret, dureeAnnees) {
+    // Convertir le taux d'intérêt en décimal
+    tauxInteret = tauxInteret / 100;
+
+    // Calculer le nombre total de paiements mensuels
+    var nombrePaiements = dureeAnnees * 12;
+
+    // Calculer le montant des paiements mensuels
+    var tauxMensuel = tauxInteret / 12;
+    var paiementMensuel = montantInitial * (tauxMensuel / (1 - Math.pow(1 + tauxMensuel, -nombrePaiements)));
+
+    // Calculer le montant total payé
+    var montantTotalPaye = paiementMensuel * nombrePaiements;
+
+    // Calculer le montant d'intérêts payés
+    var montantInteretsPayes = montantTotalPaye - montantInitial;
+
+    // Calculer le total à payer après remboursement
+    var totalPayer = montantInitial + montantInteretsPayes;
+
+    return [totalPayer, paiementMensuel];
+}
+
+function calculer(formulaire) {
+    var montant = parseFloat(formulaire.montant.value);
+    var taux = parseFloat(formulaire.taux.value);
+    var terme = parseFloat(formulaire.terme.value);
+    var resultats = calculerTotalPaiementHypothecaire(montant, taux, terme);
+	var paiementMensuel = resultats[1];
+    var totalPayer = resultats[0];
+   
+alert("Montant emprunté: $" + montant.toFixed(2) + "\nTaux d'intérêt: " + taux.toFixed(2) + "%" + "\nTerme: " + terme + " années" +  "\nPaiement mensuel: $" + paiementMensuel.toFixed(2) + "\nTotal à payer après remboursement: $" + totalPayer.toFixed(2));
+}
+
+    </script>
+  <div class="container text-center">
+    <input type="button" value="Retour au Menu" onclick="window.location.href='menu.html';" class="menu-button" />
+</div>
+
+</body>
+</html>
+

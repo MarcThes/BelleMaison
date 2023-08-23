@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Infos Clients</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="center-text margin-top">
+<div class="horloge-div">
+<div id="messageBar" class="message-bar"></div>
+      <p>
+         <h1 style="color:gold">BELLEMAISON</h1>
+      </p>
+   </div>
+
+    <h2>Informations Clients</h2>
+   <form name="formulaire">
+    <label class="maison-desc center-text" for="nom">Nom:</label> <input type="text" id="nom" name="nom"><br/>
+    <label class="maison-desc center-text" for="prenom">Prénom:</label> <input type="text" id="prenom" name="prenom"><br/>
+    <label class="maison-desc center-text" for="email">Email:</label> <input type="email" id="email" name="email"><br/>
+    <label class="maison-desc center-text" for="adresse">Adresse:</label> <input type="text" id="adresse" name="adresse"><br/>
+    <label class="maison-desc center-text" for="datenaissance">Date de naissance:</label> <input type="date" id="datenaissance" name="datenaissance"><br/>
+    <input type="button" name="Effacer" value="Effacer" onclick="this.form.reset();"><br/>
+    <input type="button" value="Valider" onclick="confirmer(this.form);"><br/>
+
+</form>
+
+
+   <script>
+    function confirmer(formulaire) {
+        var nom = formulaire.nom.value;
+        var prenom = formulaire.prenom.value;
+        var email = formulaire.email.value;
+        var adresse = formulaire.adresse.value;
+        var datenaissance = formulaire.datenaissance.value;
+        
+        // Validation de l'email
+        var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regexEmail.test(email)) {
+            alert('Veuillez saisir une adresse email valide.');
+            return;
+        }
+        
+        var confirmation = confirm('Nom: ' + nom + '\n' + 
+        'Prénom: ' + prenom + '\n' + 
+        'Email: ' + email + '\n' + 
+        'Adresse: ' + adresse + '\n' + 
+        'Date de naissance: ' + datenaissance + '\n' + 
+        'Confirmer Client enregistré');
+
+        if (confirmation) {
+             var messageBar = document.getElementById('messageBar');
+        messageBar.textContent = 'Vos informations sont enregistrées';
+        messageBar.classList.add('show');
+        
+        // Faire disparaître la barre de message après 3 secondes
+        setTimeout(function() {
+            messageBar.classList.remove('show');
+            }, 3000);
+        }
+    }
+
+    document.getElementById("datenaissance").addEventListener("focus", function() {
+        if (!this.value) {
+            // Entrez la date par défaut que vous souhaitez afficher ici
+            this.value = "2000-01-01";
+        }
+    });
+</script>
+
+
+  <div class="container text-center">
+    <input type="button" value="Retour au Menu" onclick="window.location.href='menu.html';" class="menu-button" />
+</div>
+
+</body>
+</html>

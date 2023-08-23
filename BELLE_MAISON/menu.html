@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<html>
+   <head>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="style.css">
+      <script type="text/javascript"> 
+         function refresh(){
+             var t = 1000; // rafraîchissement en millisecondes
+             setTimeout('afficherDateHeure()',t)
+         }
+         
+        function afficherDateHeure() {
+    var date = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var jourSemaine = date.toLocaleDateString('fr-FR', options);
+    document.getElementById('jourSemaine').textContent = jourSemaine;
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    var day = date.getDate();
+    var month = date.getMonth() + 1; // Les mois sont indexés à partir de 0
+    var year = date.getFullYear();
+    
+    if (day < 10) { day = '0' + day; }
+    if (month < 10) { month = '0' + month; }
+    
+    if( h < 10 ){ h = '0' + h; }
+    if( m < 10 ){ m = '0' + m; }
+    if( s < 10 ){ s = '0' + s; }
+    var time = h + ':' + m + ':' + s
+    document.getElementById('horloge').innerHTML = time;
+    refresh();
+}
+
+      </script>
+    <title>Belle Maison Menu</title>
+  </head>
+  <body class="center-text" onload="afficherDateHeure()">
+  <div class="horloge-div">
+    <span id="horloge" style="color:gold;font-size:20px;display:block;"></span>
+    <span id="jourSemaine" style="color:gold"></span>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <h1 style="color: gold;">BELLEMAISON</h1>
+    </div>
+  </div>
+     
+  <div class="nav-container">
+    <ul class="horizontal-list">
+        <li><a href="infosclients.html">Infos Clients</a></li>
+        <li><a href="typesdeproprietes.html">Types de Propriétés</a></li>
+        <li><a href="calculhypotheque.html">Calcul Hypothèque</a></li>
+    </ul>
+</div>
+          
+   <div class="slideshow">
+      <img class="active" src="villa8.jpg" alt="Image 1">
+      <img src="villa9.jpg" alt="Image 2">
+      <img src="villa_luxe.jpg" alt="Image 3">
+      <img src="villa6.jpg" alt="Image 4">
+      <img src="villa5.jpg" alt="Image 5">
+      <img src="villa9.jpg" alt="Image 6">
+      <img src="villa2.jpg" alt="Image 6">
+       </div>
+      
+   <script>
+     const images = document.querySelectorAll('.slideshow img');
+     let currentImageIndex = 0;
+
+   function showNextImage() {
+     images[currentImageIndex].classList.remove('active');
+     currentImageIndex = (currentImageIndex + 1) % images.length;
+     images[currentImageIndex].classList.add('active');
+   }
+
+setInterval(showNextImage, 3000); // Changez la durée entre chaque image (en millisecondes) selon vos besoins
+
+</script>
+
+<!-- Side navigation 
+<div class="sidenav">
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Contact</a>
+</div> -->
+
+  </body>
+</html>
